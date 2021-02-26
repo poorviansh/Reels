@@ -1,0 +1,26 @@
+.feed-container
+{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.center{
+    height: 100vh;
+    width: 40%;
+    
+}
+.right{
+    height: 100vh;
+    width: 20%;
+    /* background-color: green; */
+}
+@media only screen and (max-width: 1000px) {
+   .center{
+       width: 50%;
+   }
+}
+@media only screen and (max-width: 500px) {
+    .center{
+        width: 60%;
+    }
+ }

@@ -1,0 +1,68 @@
+.video-styles
+{
+    height: 80vh;
+    width: 100%;
+    background: url('https://image.freepik.com/free-vector/white-blurred-background_1034-249.jpg') no-repeat;
+    
+}
+.video-styles2
+{
+    height: 80vh;
+    /* width: 35vw; */
+    
+}
+.videos{
+    display: flex;
+    justify-content: center;
+    /* background-color: brown; */
+}
+.videos-container
+{
+ 
+}
+.place
+{
+    height: 5vh;
+}
+.MuiCardContent-root
+{
+    padding: 0px !important;
+}
+.MuiCardContent-root:last-child
+{
+    padding: 0px !important;
+}
+.likes
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-bottom: 1%;
+}
+.dcontainer
+{
+    display: flex;
+}
+.MuiDialogContent-root:first-child
+{
+    padding-top: 0px !important;
+}
+.MuiDialogContent-root{
+    padding: 0px !important;
+}
+.video-part
+{
+    flex-grow: 1;
+    flex-basis: 0;
+    background: url('https://image.freepik.com/free-vector/white-blurred-background_1034-249.jpg') no-repeat;
+    display: flex;
+    justify-content: center;
+    width: 35vw;
+}
+.info-part
+{
+    flex-grow: 1;
+    flex-basis: 0;
+    width: 35vw;
+}
