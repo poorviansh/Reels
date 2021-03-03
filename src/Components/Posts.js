@@ -18,7 +18,8 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import Comments from './Comments'
-export default function Posts({ userData = null }) {
+import AddComment from './AddComment'
+export default function Posts({ userData = null,posts, setPosts }) {
   const useStyles = makeStyles({
     root: {
       width: '100%',
@@ -34,7 +35,8 @@ export default function Posts({ userData = null }) {
     },
     vac: {
       marginLeft: '3.5%',
-      color: '#8e8e8e'
+      color: '#8e8e8e',
+      cursor:'pointer'
     },
     dp: {
       marginLeft: '2%'
@@ -42,6 +44,10 @@ export default function Posts({ userData = null }) {
     cc: {
       height: '50vh',
       overflowY: 'scroll'
+    },
+    seeComments:{
+      height:'54vh',
+      overflowY:'scroll'
     }
 
   });
@@ -53,9 +59,9 @@ export default function Posts({ userData = null }) {
   const handleClose = () => {
     setOpenId(null);
   };
-  const [posts, setPosts] = useState([]);
+  
   const classes = useStyles();
-
+  const [comments,setComments] =useState({}) 
   const callback = async entries => {
     console.log(entries);
     entries.forEach(element => {
@@ -91,7 +97,7 @@ export default function Posts({ userData = null }) {
   });
   useEffect(() => {
     let parr = [];
-    database.posts.get().then((querySnapshot) => {
+    const unsub=database.posts.onSnapshot(querySnapshot => {
       parr = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
@@ -106,7 +112,8 @@ export default function Posts({ userData = null }) {
     //     console.log("Error getting documents: ", error);
     // });
 
-
+    // unsub();
+    return unsub;
 
   }, [])
   useEffect(() => {
@@ -125,7 +132,7 @@ export default function Posts({ userData = null }) {
   return (
     <>
       <div className='place'></div>
-      {posts.length == 0 || userData == null ? <CircularProgress className={classes.loader} /> :
+      {posts==null || userData == null ? <CircularProgress className={classes.loader} /> :
         <div className='video-container'>
           {posts.map((post, index) => (
             <div key={index}>
@@ -151,6 +158,7 @@ export default function Posts({ userData = null }) {
                     <div className='likes'>
                       <Likes userData={userData} postData={post} />
                       <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : ` others`}</Typography>
+                     
                     </div>
                     <div className='comments'>
                       <Typography className={classes.vac} onClick={() => handleClickOpen(post.pId)} variant='body2'>
@@ -181,16 +189,27 @@ export default function Posts({ userData = null }) {
                                   title={post?.uName}
 
                                 />
-                                <hr style={{ border: "none", height: "1px", color: "#dfe6e9", backgroundColor: "#dfe6e9" }} />
                                 
-
+                                <hr style={{ border: "none", height: "1px", color: "#dfe6e9", backgroundColor: "#dfe6e9" }} />
+                                <CardContent className={classes.seeComments}>
+                                  
+                                <Comments userData={userData} postData={post} comments={comments} setComments={setComments}/>
+                                </CardContent>
+                                
                               </Card>
-
+                              <div className='extra'>
+                              <div className='likes'>
+                                <Likes userData={userData} postData={post} />
+                                <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : ` others`}</Typography>
+                                </div>
+                                <AddComment  userData={userData} postData={post} acomments={comments} setComments={setComments}/> 
+                                </div>
                             </div>
                           </div>
                         </MuiDialogContent>
                       </Dialog>
                     </div>
+                    <AddComment  userData={userData} postData={post} acomments={comments} setComments={setComments}/>
                   </CardContent>
                 </Card>
 

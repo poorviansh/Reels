@@ -8,7 +8,7 @@
 .video-styles2
 {
     height: 80vh;
-    /* width: 35vw; */
+    width: 35vw;
     
 }
 .videos{
@@ -22,7 +22,7 @@
 }
 .place
 {
-    height: 5vh;
+    height: 2vh;
 }
 .MuiCardContent-root
 {
@@ -64,5 +64,30 @@
 {
     flex-grow: 1;
     flex-basis: 0;
-    width: 35vw;
+    width: 42vw;
 }
+@media only screen and (max-width: 720px) {
+    .video-part{
+        display: none;
+
+    }
+    .info-part{
+        width: 80%;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    .right{
+        display: none;
+
+    }
+    .center{
+        width: 80%;
+    }
+    .video-style{
+        height: 70vh;
+    }
+    .insta-head2 img {
+        width: 100%;
+        height: 3.8vh;
+    }
+  }

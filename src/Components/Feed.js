@@ -5,9 +5,11 @@ import Posts from './Posts'
 import {database} from '../firebase';
 import {useAuth} from '../Context/AuthContext';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import UploadFile from './UploadFile'
 export default function Feed() {
     const [userData,setUserData]=useState(null);
     const {currentUser} = useAuth(); 
+    const [posts, setPosts] = useState(null);
     useEffect(async() => {
         try{
         database.users.doc(currentUser.uid).onSnapshot((doc) => {
@@ -27,9 +29,12 @@ export default function Feed() {
         {userData==null?<CircularProgress/>:
         <>
         <Header userData={userData}/>
+        <div className='portion' style={{height:'10.5vh'}}></div>
+      
         <div className='feed-container'>
             <div className='center'>
-                <Posts userData={userData}/>
+            <UploadFile userData={userData} posts={posts} setPosts={setPosts}/>
+                <Posts userData={userData} posts={posts} setPosts={setPosts}/>
             </div>
             <div className='right'></div>
          

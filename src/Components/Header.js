@@ -86,6 +86,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  appb:{
+    backgroundColor:'white'
+  }
 
 }));
 
@@ -161,7 +164,7 @@ export default function Header(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar color='transparent' position="static">
+      <AppBar className={classes.appb} position="fixed">
         <Toolbar>
         <div className="insta-head2">
         <img src={InstaLogo}/>
