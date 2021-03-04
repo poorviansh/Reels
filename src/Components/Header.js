@@ -190,7 +190,7 @@ export default function Header(props) {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
+              // color="black"
             >
                <Avatar alt="Remy Sharp" src={props?.userData?.profileUrl} />
             </IconButton>
@@ -201,7 +201,7 @@ export default function Header(props) {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
+              
             >
               <MoreIcon />
             </IconButton>

@@ -46,7 +46,7 @@ export default function Comments(props) {
         props.comments[props.postData.pId].map((comment,index)=>(
         <div key={index} className='comment-div'>
             <Avatar src={comment.uUrl}  className={classes.da}/>
-            <p><span style={{fontWeight:'bold'}}>{comment.uName}</span>&nbsp;&nbsp;{comment.text}</p>
+            <p><span style={{fontWeight:'bold',display:'inline-block'}}>{comment.uName}</span>&nbsp;&nbsp;{comment.text}</p>
         </div>
         ))
       
