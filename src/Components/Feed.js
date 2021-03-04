@@ -10,16 +10,14 @@ export default function Feed() {
     const [userData,setUserData]=useState(null);
     const {currentUser} = useAuth(); 
     const [posts, setPosts] = useState(null);
-    useEffect(async() => {
-        try{
-        database.users.doc(currentUser.uid).onSnapshot((doc) => {
+    useEffect(()=> {
+        
+        const unsub= database.users.doc(currentUser.uid).onSnapshot((doc) => {
           // doc.data() is never undefined for query doc snapshots
-          setUserData(doc.data()); 
+          setUserData(doc.data());
+     
     })
-}catch(error) {
-            console.log("Error getting documents: ", error);
-        };
-           
+    return ()=>{unsub()};   
       }, [])
     return (
         <>

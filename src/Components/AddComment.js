@@ -42,7 +42,7 @@ export default function AddComment({userData,postData,acomments,setComments}) {
                 console.log(p);
                    setComments(p);
                }
-               
+           
             })
         }).catch(e=>{
             console.log("This is the error "+e)

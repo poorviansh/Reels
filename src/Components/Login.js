@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 import './Login.css'
 import Insta from '../Assets/insta.png'
 import { makeStyles } from '@material-ui/core/styles';
@@ -73,6 +73,9 @@ export default function Login() {
   const handlePassword = (e)=>{
       setPassword(e.target.value);
   }
+
+
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -81,12 +84,14 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(email, password)
+      setLoading(false)
       history.push("/")
     } catch {
       setError("Failed to log in")
+      setLoading(false)
     }
 
-    setLoading(false)
+   
   }
     return (
         

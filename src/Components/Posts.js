@@ -43,11 +43,11 @@ export default function Posts({ userData = null,posts, setPosts }) {
     },
     cc: {
       height: '50vh',
-      overflowY: 'scroll'
+      overflowY: 'auto'
     },
     seeComments:{
       height:'54vh',
-      overflowY:'scroll'
+      overflowY:'auto'
     }
 
   });
@@ -97,7 +97,7 @@ export default function Posts({ userData = null,posts, setPosts }) {
   });
   useEffect(() => {
     let parr = [];
-    const unsub=database.posts.onSnapshot(querySnapshot => {
+    const unsub=database.posts.orderBy('createdAt','desc').onSnapshot(querySnapshot => {
       parr = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots

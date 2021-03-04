@@ -60,8 +60,9 @@ export default function UploadFile(props) {
            let res = await  database.users.doc(props.userData.userId).update({
               postIds:[...props.userData.postIds,docRef.id]
             })
-            props.setPosts([...props.posts,obj])
+          
           }).then(()=>{
+            // props.setPosts([...props.posts,obj])
             setLoading(false);
           })
           .catch(e=>{
