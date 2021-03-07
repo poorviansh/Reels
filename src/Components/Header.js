@@ -99,7 +99,7 @@ export default function Header(props) {
   const history = useHistory();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const { logout } = useAuth();
+  const { logout,currentUser } = useAuth();
  
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -114,8 +114,8 @@ export default function Header(props) {
     handleMobileMenuClose();
   };
   const handleProfile=()=>{
-   
-    history.push("/profile")
+   console.log(currentUser)
+    history.push(`/profile/${currentUser.uid}`)
   }
   const handleLogout=async ()=>{
     await logout();
