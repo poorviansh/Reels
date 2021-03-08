@@ -125,6 +125,10 @@ export default function Header(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const handleBannerClick= ()=>
+  {
+    history.push("/")
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -167,7 +171,7 @@ export default function Header(props) {
       <AppBar className={classes.appb} position="fixed">
         <Toolbar>
         <div className="insta-head2">
-        <img src={InstaLogo}/>
+        <img src={InstaLogo} onClick={handleBannerClick} style={{cursor:'pointer'}} />
         </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

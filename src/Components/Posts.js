@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { database } from '../firebase';
+import {useHistory } from "react-router-dom";
 import Video from './Video';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -52,7 +53,11 @@ export default function Posts({ userData = null,posts, setPosts }) {
 
   });
   const [openId, setOpenId] = React.useState(null);
+  const history = useHistory();
   // const [open, setOpen] = useState(false);
+  const handleProfileClick = (id)=>{
+    history.push(`/profile/${id}`)
+  }
   const handleClickOpen = (id) => {
     setOpenId(id);
   };
@@ -140,15 +145,11 @@ export default function Posts({ userData = null,posts, setPosts }) {
                 <Card className={classes.root} variant="outlined">
                   <CardHeader
                     avatar={
-                      <Avatar src={post?.uProfile} aria-label="recipe" className={classes.avatar}>
+                      <Avatar style={{cursor:'pointer'}} onClick={()=>handleProfileClick(post?.userId)} src={post?.uProfile} aria-label="recipe" className={classes.avatar}>
                       </Avatar>
                     }
-                    action={
-                      <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                    title={post?.uName}
+                    
+                    title={<div className='htitle' onClick={()=>handleProfileClick(post?.userId)}>{post?.uName}</div>}
 
                   />
                   <CardContent>
@@ -167,7 +168,7 @@ export default function Posts({ userData = null,posts, setPosts }) {
                         <MuiDialogContent>
                           <div className='dcontainer'>
                             <div className='video-part'>
-                              <video className='video-styles2' controls id={post.id} muted="muted" type="video/mp4" >
+                              <video  autoPlay={true} className='video-styles2' controls id={post.id} muted="muted" type="video/mp4" >
                                 <source src={post.pUrl} type="video/webm" />
                               </video>
                             </div>
