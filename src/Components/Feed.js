@@ -27,14 +27,14 @@ export default function Feed() {
         {userData==null?<CircularProgress/>:
         <>
         <Header userData={userData}/>
-        <div className='portion' style={{height:'10.5vh'}}></div>
+        <div className='portion' style={{height:'9.5vh'}}></div>
       
         <div className='feed-container'>
             <div className='center'>
             <UploadFile userData={userData} posts={posts} setPosts={setPosts}/>
                 <Posts userData={userData} posts={posts} setPosts={setPosts}/>
             </div>
-            <div className='right'></div>
+            
          
         </div>
         </>}

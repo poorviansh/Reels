@@ -3,6 +3,7 @@ import { database } from '../firebase';
 import {useHistory } from "react-router-dom";
 import Video from './Video';
 import { makeStyles } from '@material-ui/core/styles';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -10,14 +11,14 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
+import Ticker from 'react-ticker';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import './Posts.css'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Likes from './Likes';
+import Likes2 from './Likes2';
 import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
 import Comments from './Comments'
 import AddComment from './AddComment'
 export default function Posts({ userData = null,posts, setPosts }) {
@@ -49,6 +50,20 @@ export default function Posts({ userData = null,posts, setPosts }) {
     seeComments:{
       height:'54vh',
       overflowY:'auto'
+    },
+    ci:{
+    
+      color: 'white',
+      left:'9%',
+      cursor:'pointer'
+    },
+    mn:{
+      color:'white',
+      
+     
+    },
+    tmn:{
+      color:'white'
     }
 
   });
@@ -138,32 +153,32 @@ export default function Posts({ userData = null,posts, setPosts }) {
     <>
       <div className='place'></div>
       {posts==null || userData == null ? <CircularProgress className={classes.loader} /> :
-        <div className='video-container'>
+        <div className='video-container' id="video-container">
           {posts.map((post, index) => (
-            <div key={index}>
-              <div className='post'>
-                <Card className={classes.root} variant="outlined">
-                  <CardHeader
-                    avatar={
-                      <Avatar style={{cursor:'pointer'}} onClick={()=>handleProfileClick(post?.userId)} src={post?.uProfile} aria-label="recipe" className={classes.avatar}>
-                      </Avatar>
-                    }
-                    
-                    title={<div className='htitle' onClick={()=>handleProfileClick(post?.userId)}>{post?.uName}</div>}
-
-                  />
-                  <CardContent>
+            <React.Fragment key={index}>
+           
                     <div className="videos">
                       <Video source={post.pUrl} id={post.pId} />
-                    </div>
-                    <div className='likes'>
+                      <div className='fa' style={{display:'flex'}}>
+                        <Avatar src={post.uProfile}></Avatar>
+                        <h4>{post.uName}</h4>
+                      </div>
+                      <div className='video-ticker'  >
+                      <Ticker direction='toRight' offset='20%' mode='smooth'>
+        {({ index }) => (
+            <>
+            
+           <Typography align='center' variant='subtitle2' className={classes.tmn}>
+             <MusicNoteIcon fontSize='small' className={classes.mn} /> This is sample
+           </Typography>
+            
+          
+            </>
+        )}
+    </Ticker>
+                      </div>
                       <Likes userData={userData} postData={post} />
-                      <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : ` others`}</Typography>
-                     
-                    </div>
-                    <div className='comments'>
-                      <Typography className={classes.vac} onClick={() => handleClickOpen(post.pId)} variant='body2'>
-                        View all comments</Typography>
+                      <ChatBubbleIcon onClick={() => handleClickOpen(post.pId)} className={`${classes.ci} icon-styling`} />
                       <Dialog maxWidth="md" onClose={handleClose} aria-labelledby="customized-dialog-title" open={openId === post.pId}>
                         <MuiDialogContent>
                           <div className='dcontainer'>
@@ -200,7 +215,7 @@ export default function Posts({ userData = null,posts, setPosts }) {
                               </Card>
                               <div className='extra'>
                               <div className='likes'>
-                                <Likes userData={userData} postData={post} />
+                                <Likes2 userData={userData} postData={post} />
                                 <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : ` others`}</Typography>
                                 </div>
                                 <AddComment  userData={userData} postData={post} acomments={comments} setComments={setComments}/> 
@@ -210,18 +225,9 @@ export default function Posts({ userData = null,posts, setPosts }) {
                         </MuiDialogContent>
                       </Dialog>
                     </div>
-                    <AddComment  userData={userData} postData={post} acomments={comments} setComments={setComments}/>
-                  </CardContent>
-                </Card>
-
-              </div>
               <div className='place'>
-
-
-
-
               </div>
-            </div>
+            </React.Fragment>
           ))}
         </div>
       }

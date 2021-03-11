@@ -4,10 +4,11 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import MovieIcon from '@material-ui/icons/Movie';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import {database,storage} from '../firebase'
+import {database,storage} from '../firebase';
+import Alert from '@material-ui/lab/Alert';
 export default function UploadFile(props) {
   const useStyles = makeStyles({});
-    const [error,setError] = useState('');
+    const [error,setError] = useState(null);
     const [loading,setLoading] = useState(false);
     const classes = useStyles();
     const types= ['video/mp4', 'video/webm', 'video/ogg'];
@@ -16,18 +17,28 @@ export default function UploadFile(props) {
       console.log(props)
       if(file==null)
       {
+        
         setError("Please select a file");
+        setTimeout(()=>{
+          setError(null);
+        },2000)
         return;
       }
       console.log(file);
       if(types.indexOf(file.type)==-1)
       {
         setError("Please select a video file");
+        setTimeout(()=>{
+          setError(null);
+        },2000)
         return;
       }
       if(file.size/(1024*1024)>100)
       {
         setError("The selected file is very big");
+        setTimeout(()=>{
+          setError(null);
+        },2000)
         return;
       }
       const id =uuidv4();
@@ -67,6 +78,9 @@ export default function UploadFile(props) {
           })
           .catch(e=>{
             setError(e);
+            setTimeout(()=>{
+              setError(null);
+            },2000)
             setLoading(false);
           })
          
@@ -78,7 +92,8 @@ export default function UploadFile(props) {
     }
     return (
         <div>
-          
+          { error!= null ? <Alert severity="error">{error}</Alert>:
+          <>
           <input
           color="primary"
          
@@ -100,6 +115,8 @@ export default function UploadFile(props) {
           </Button>
         </label>
         {loading==true? <LinearProgress color='secondary' style={{marginTop:'2%'}}/>:<></>}
+        </>
+          }
         </div>
     )
 }

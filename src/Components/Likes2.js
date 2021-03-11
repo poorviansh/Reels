@@ -1,19 +1,18 @@
 import React,{useState,useEffect}  from 'react'
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { makeStyles } from '@material-ui/core/styles';
 import {database} from '../firebase';
-export default function Likes({userData=null,postData=null}) {
+export default function Likes2({userData=null,postData=null}) {
     const useStyles = makeStyles({
      like:{
          color:'#e74c3c',
          cursor:'pointer',
-      
-    
      },
      unlike:{
         cursor:'pointer',
-     
-        color:'white'
+       
+        color:'black'
      }
  
       });
@@ -62,8 +61,8 @@ export default function Likes({userData=null,postData=null}) {
         <div>
             {like!=null?
         <>
-            {like==false?<FavoriteIcon className={`${classes.unlike} icon-styling`} onClick={handleLike}/>:
-              <FavoriteIcon className={`${classes.like} icon-styling`} onClick={handleLike} />}
+            {like==false?<FavoriteBorderIcon className={classes.unlike} onClick={handleLike}/>:
+              <FavoriteIcon className={classes.like} onClick={handleLike} />}
         </>:<></>}
         </div>
     )

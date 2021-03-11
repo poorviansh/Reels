@@ -1,8 +1,8 @@
 .video-styles
 {
     height: 80vh;
-    width: 100%;
-    background: url('https://image.freepik.com/free-vector/white-blurred-background_1034-249.jpg') no-repeat;
+    /* width: 100%; */
+    /* background: url('https://image.freepik.com/free-vector/white-blurred-background_1034-249.jpg') no-repeat; */
     
 }
 .video-styles2
@@ -12,14 +12,13 @@
     
 }
 .videos{
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
     /* background-color: brown; */
+    position: relative;
+    width: 100% !important;
 }
-.videos-container
-{
- 
-}
+
 .place
 {
     height: 2vh;
@@ -53,9 +52,9 @@
 }
 .video-part
 {
-    flex-grow: 1;
-    flex-basis: 0;
-    background: url('https://image.freepik.com/free-vector/white-blurred-background_1034-249.jpg') no-repeat;
+    /* flex-grow: 1;
+    flex-basis: 0; */
+    /* background: url('https://image.freepik.com/free-vector/white-blurred-background_1034-249.jpg') no-repeat; */
     display: flex;
     justify-content: center;
     width: 35vw;
@@ -71,6 +70,53 @@
     font-weight: 500;
     cursor: pointer;
 }
+
+.video-container {
+    
+    height: 80vh;
+    border-radius: 20px;
+    background-color: white;
+    overflow: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+  }
+  
+  /* for chrome and opera */
+  .video-container::-webkit-scrollbar {
+    display: none;
+  }
+.fa
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 18%;
+    margin-left: 25%;
+}
+.fa h4{
+    margin: 0px;
+    margin-top: 1%;
+    margin-left: 2%;
+    color: white;
+}
+
+.icon-styling
+{
+    position: absolute;
+    bottom: 0;
+   margin-bottom: 5%;
+   margin-left: 26%;
+}
+.video-ticker
+{
+    position: absolute;
+    bottom: 0;
+    width: 52%;
+    margin-bottom: 11.7%;
+    margin-left: 25%;
+}
+
+
 @media only screen and (max-width: 720px) {
     .video-part{
         display: none;
@@ -80,16 +126,27 @@
         width: 80%;
     }
   }
+  @media only screen and (max-width: 490px) {
+      .fa{
+          margin-left: 15%;
+      }
+      .video-ticker{
+          margin-left: 16%;
+      }
+      .icon-styling{
+          margin-left: 16%;
+      }
+  }
   @media only screen and (max-width: 500px) {
     .right{
         display: none;
 
     }
     .center{
-        width: 80%;
+        width: 100%;
     }
     .video-style{
-        height: 70vh;
+        /* height: 70vh; */
     }
     .insta-head2 img {
         width: 100%;
