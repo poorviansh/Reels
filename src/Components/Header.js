@@ -97,7 +97,7 @@ export default function Header(props) {
     handleMobileMenuClose();
   };
   const handleProfile=()=>{
-   console.log(currentUser)
+  //  console.log(currentUser)
     history.push(`/profile/${currentUser.uid}`)
   }
   const handleLogout=async ()=>{

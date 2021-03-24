@@ -14,7 +14,7 @@ export default function UploadFile(props) {
     const types= ['video/mp4', 'video/webm', 'video/ogg'];
     const onChange=(e)=>{
       const file =  e?.target?.files[0];
-      console.log(props)
+      // console.log(props)
       if(file==null)
       {
         
@@ -24,7 +24,7 @@ export default function UploadFile(props) {
         },2000)
         return;
       }
-      console.log(file);
+      // console.log(file);
       if(types.indexOf(file.type)==-1)
       {
         setError("Please select a video file");
@@ -41,6 +41,7 @@ export default function UploadFile(props) {
         },2000)
         return;
       }
+      //initially we will be making it by using the firestore's id..this will be served as an improvement.
       const id =uuidv4();
       const uploadTask = storage.ref(`/posts/${props.userData.userId}/${file.name}`).put(file);
     
@@ -96,7 +97,6 @@ export default function UploadFile(props) {
           <>
           <input
           color="primary"
-         
           type="file"
           onChange={onChange}
           id="icon-button-file"
@@ -104,7 +104,7 @@ export default function UploadFile(props) {
         />
         <label htmlFor="icon-button-file">
           <Button
-          disabled={loading}
+            disabled={loading}
             variant="outlined"
             component="span"
             className={classes.button}

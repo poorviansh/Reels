@@ -83,7 +83,7 @@ export default function Signup() {
         let file = e?.target?.files[0];
         if(file!=null)
         setFile(file);
-        console.log(file)
+        // console.log(file)
     }
     const handleSignUp=async()=>{
         if(file==null)
@@ -96,7 +96,7 @@ export default function Signup() {
             setLoading(true)
            let userCredential= await signup(email, password);
            let uid = userCredential.user.uid;
-           console.log(uid);
+        //    console.log(uid);
             const uploadTask = storage.ref(`/users/${uid}/ProfileImage`).put(file);
             uploadTask.on('state_changed', 
   (snapshot) => {
@@ -113,7 +113,7 @@ export default function Signup() {
     // Handle successful uploads on complete
     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
     uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-      console.log('File available at', downloadURL);
+    //   console.log('File available at', downloadURL);
       database.users.doc(uid).set({
           email:email,
           userId:uid,

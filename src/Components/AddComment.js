@@ -4,7 +4,7 @@ import { database } from '../firebase';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-export default function AddComment({userData,postData,acomments,setComments}) {
+export default function AddComment({userData,postData}) {
     const useStyles = makeStyles({
         cbtn:{
            
@@ -20,7 +20,7 @@ export default function AddComment({userData,postData,acomments,setComments}) {
         setText(text)
     }
     function handleOnEnter () {
-        console.log('enter', textu)
+        // console.log('enter', textu)
         let obj = {
             text:textu,
             uName:userData.fullName,
@@ -29,23 +29,9 @@ export default function AddComment({userData,postData,acomments,setComments}) {
         database.comments.add(obj).then(doc=>{
             database.posts.doc(postData.postId).update({
                 comments:[...postData.comments,doc.id]
-            }).then(()=>{
-                if(acomments[postData.pId]!=undefined)
-                {
-                    let p = {...acomments,[postData.pId]:[...acomments[postData.pId],obj]}
-                    console.log(p);
-                    setComments(p)
-                }
-               else
-               {
-                let p = {...acomments,[postData.pId]:[obj]}
-                console.log(p);
-                   setComments(p);
-               }
-           
             })
         }).catch(e=>{
-            console.log("This is the error "+e)
+            // console.log("This is the error "+e)
         })
         setText('')
       }

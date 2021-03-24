@@ -74,13 +74,11 @@ export default function Login() {
       setPassword(e.target.value);
   }
 
-
-
   async function handleSubmit(e) {
     e.preventDefault()
 
     try {
-        console.log(email,password)
+        // console.log(email,password)
       setError("")
       setLoading(true)
       await login(email, password)

@@ -6,6 +6,8 @@ import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function Comments(props) {
+    console.log('rendered comments');
+    const [comments,setComments] =useState(null) 
     const useStyles = makeStyles({
         da:{
             marginRight:'2%',
@@ -14,13 +16,15 @@ export default function Comments(props) {
     })
     const classes = useStyles();
     useEffect(async() => {
+        console.log("The use Effect of comments was called.")
         let arr=[];
        
-        console.log(props.userData);
-        console.log(props.postData.comments);
+        // console.log(props.userData);
+        // console.log(props.postData.comments);
         
         for(let i=0;i<props.postData.comments.length;i++)
         {
+            console.log("The use Effect of comments was called.")
             // flag++;
             // let cid=props.comments[i];
             // database.comments.doc(cid).onSnapshot((doc)=>{
@@ -28,22 +32,23 @@ export default function Comments(props) {
             // });
             let cid=props.postData.comments[i];
             let data = await database.comments.doc(cid).get();
-            console.log(data.data());
+            // console.log(data.data());
             arr.push(data.data());
         }
-        let id = props.postData.pId;
-        let obj = {...props.comments,[props.postData.pId]:arr}
-        props.setComments(obj);
-        console.log(props.comments)
+        // let obj = {...props.comments,[props.postData.pId]:arr}
+        setComments(arr);
+        // console.log(props.comments)
     
-      },[])
+       
+    
+      },[props.postData])
     
     return (
         <>
         
-        {props.comments[props.postData.pId]==undefined?<CircularProgress/>
+        {comments==null?<CircularProgress/>
         :
-        props.comments[props.postData.pId].map((comment,index)=>(
+        comments.map((comment,index)=>(
         <div key={index} className='comment-div'>
             <Avatar src={comment.uUrl}  className={classes.da}/>
             <p><span style={{fontWeight:'bold',display:'inline-block'}}>{comment.uName}</span>&nbsp;&nbsp;{comment.text}</p>

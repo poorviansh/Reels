@@ -3,6 +3,7 @@ import { auth } from "../firebase"
 
 const AuthContext = React.createContext()
 
+//custom hook that allows components to access context data
 export function useAuth() {
   return useContext(AuthContext)
 }
@@ -16,7 +17,7 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    console.log("ABCD");
+    // console.log("ABCD");
     return auth.signInWithEmailAndPassword(email, password)
   }
 

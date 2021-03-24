@@ -21,7 +21,7 @@ import Dialog from '@material-ui/core/Dialog';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import Comments from './Comments'
 import AddComment from './AddComment'
-export default function Posts({ userData = null,posts, setPosts }) {
+export default function Posts({ userData = null }) {
   const useStyles = makeStyles({
     root: {
       width: '100%',
@@ -67,7 +67,7 @@ export default function Posts({ userData = null,posts, setPosts }) {
     }
 
   });
-  const [openId, setOpenId] = React.useState(null);
+  const [openId, setOpenId] = useState(null);
   const history = useHistory();
   // const [open, setOpen] = useState(false);
   const handleProfileClick = (id)=>{
@@ -81,9 +81,10 @@ export default function Posts({ userData = null,posts, setPosts }) {
   };
   
   const classes = useStyles();
-  const [comments,setComments] =useState({}) 
+  const [posts, setPosts] = useState(null);
+  // const [comments,setComments] =useState(null) 
   const callback = async entries => {
-    console.log(entries);
+    // console.log(entries);
     entries.forEach(element => {
       let child = element.target.childNodes[0];
       let id = child.getAttribute("id");
@@ -118,12 +119,14 @@ export default function Posts({ userData = null,posts, setPosts }) {
   useEffect(() => {
     let parr = [];
     const unsub=database.posts.orderBy('createdAt','desc').onSnapshot(querySnapshot => {
+      console.log('The snapshot method was called')
       parr = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
+        console.log("The loop was executed")
         let data = { ...doc.data(), postId: doc.id }
-        console.log(data);
+        // console.log(data);
         parr.push(data);
       });
       setPosts(parr);
@@ -134,7 +137,6 @@ export default function Posts({ userData = null,posts, setPosts }) {
 
     // unsub();
     return unsub;
-
   }, [])
   useEffect(() => {
     if (typeof window == 'object') {
@@ -145,8 +147,12 @@ export default function Posts({ userData = null,posts, setPosts }) {
         // console.log(el);
         observer.observe(el)
       })
-      console.log(posts)
-      return () => observer.disconnect()
+      // console.log(posts)
+      return () =>{
+      
+        observer.disconnect();
+        console.log('removed');      
+      } 
     }
   }, [posts])
   return (
@@ -209,7 +215,7 @@ export default function Posts({ userData = null,posts, setPosts }) {
                                 <hr style={{ border: "none", height: "1px", color: "#dfe6e9", backgroundColor: "#dfe6e9" }} />
                                 <CardContent className={classes.seeComments}>
                                   
-                                <Comments userData={userData} postData={post} comments={comments} setComments={setComments}/>
+                                <Comments userData={userData} postData={post} />
                                 </CardContent>
                                 
                               </Card>
@@ -218,7 +224,7 @@ export default function Posts({ userData = null,posts, setPosts }) {
                                 <Likes2 userData={userData} postData={post} />
                                 <Typography className={classes.typo} variant='body2'>Liked By {post.likes.length == 0 ? 'nobody' : ` others`}</Typography>
                                 </div>
-                                <AddComment  userData={userData} postData={post} acomments={comments} setComments={setComments}/> 
+                                <AddComment  userData={userData} postData={post}/> 
                                 </div>
                             </div>
                           </div>

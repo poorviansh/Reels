@@ -9,7 +9,7 @@ import UploadFile from './UploadFile'
 export default function Feed() {
     const [userData,setUserData]=useState(null);
     const {currentUser} = useAuth(); 
-    const [posts, setPosts] = useState(null);
+  
     useEffect(()=> {
         
         const unsub= database.users.doc(currentUser.uid).onSnapshot((doc) => {
@@ -31,8 +31,8 @@ export default function Feed() {
       
         <div className='feed-container'>
             <div className='center'>
-            <UploadFile userData={userData} posts={posts} setPosts={setPosts}/>
-                <Posts userData={userData} posts={posts} setPosts={setPosts}/>
+            <UploadFile userData={userData} />
+                <Posts userData={userData}/>
             </div>
             
          

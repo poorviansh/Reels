@@ -74,7 +74,7 @@ export default function Profile() {
           {
               let pid = userData.postIds[i];
               let data = await database.posts.doc(pid).get();
-              console.log(data.data());
+              // console.log(data.data());
               parr.push(data.data());
           }
         }

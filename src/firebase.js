@@ -11,7 +11,6 @@ import 'firebase/storage'
 //   messagingSenderId: process.env.REACT_APP_FIREBASE__MESSAGING_SENDER_ID,
 //   appId: process.env.REACT_APP_FIREBASE_APP_ID
 // }
-// console.log(config);
 firebase.initializeApp({
   apiKey: "AIzaSyCIKDg6rq40D_8F-wWA9UT-7qALPj2_mhI",
   authDomain: "reels-d154f.firebaseapp.com",

@@ -3,6 +3,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { makeStyles } from '@material-ui/core/styles';
 import {database} from '../firebase';
 export default function Likes({userData=null,postData=null}) {
+  console.log('rendered');
     const useStyles = makeStyles({
      like:{
          color:'#e74c3c',
@@ -19,11 +20,11 @@ export default function Likes({userData=null,postData=null}) {
       });
       
       useEffect(() => {
-        console.log(userData);
+        // console.log(userData);
         let check = postData.likes.includes(userData?.userId)?true:false;
-        console.log(check);
+        // console.log(check);
         setLike(check);
-      },[])
+      },[postData])
       const [like,setLike]=useState(null);
       const handleLike=()=>{
           if(like==true)
@@ -34,9 +35,9 @@ export default function Likes({userData=null,postData=null}) {
               database.posts.doc(postData.postId).update({
                   likes:uarr
               }).then(()=>{
-                setLike(false);
+                // setLike(false);
               }).catch((e=>{
-                  console.log(e);
+                //   console.log(e);
               }))
              
           }
@@ -44,13 +45,13 @@ export default function Likes({userData=null,postData=null}) {
           {
               //we have to make it true
               let uarr = [...postData.likes,userData.userId]
-              console.log(uarr);
+            //   console.log(uarr);
               database.posts.doc(postData.postId).update({
                 likes:uarr
             }).then(()=>{
-                setLike(true);
+                // setLike(true);
             }).catch((e=>{
-                console.log(e);
+                // console.log(e);
             }))
 
              

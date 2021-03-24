@@ -18,9 +18,9 @@ export default function Likes2({userData=null,postData=null}) {
       });
       
       useEffect(() => {
-        console.log(userData);
+        // console.log(userData);
         let check = postData.likes.includes(userData?.userId)?true:false;
-        console.log(check);
+        // console.log(check)
         setLike(check);
       },[])
       const [like,setLike]=useState(null);
@@ -35,7 +35,7 @@ export default function Likes2({userData=null,postData=null}) {
               }).then(()=>{
                 setLike(false);
               }).catch((e=>{
-                  console.log(e);
+                //   console.log(e);
               }))
              
           }
@@ -43,13 +43,13 @@ export default function Likes2({userData=null,postData=null}) {
           {
               //we have to make it true
               let uarr = [...postData.likes,userData.userId]
-              console.log(uarr);
+            //   console.log(uarr);
               database.posts.doc(postData.postId).update({
                 likes:uarr
             }).then(()=>{
                 setLike(true);
             }).catch((e=>{
-                console.log(e);
+                // console.log(e);
             }))
 
              
