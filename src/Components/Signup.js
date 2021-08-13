@@ -88,7 +88,10 @@ export default function Signup() {
     const handleSignUp=async()=>{
         if(file==null)
         {
-            setError("Please upload your profile Image")
+            setError("Please upload your profile Image");
+            setTimeout(()=>{
+                setError('')
+            },2000)
             return;
         }
         try {
